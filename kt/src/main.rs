@@ -30,28 +30,32 @@ fn main() {
     let cli = Cli::parse();
     if let Some(file) = cli.file.as_deref() {
         if file.exists() {
-            match File::open(file) {
-                Ok(mut f) => {
-                    let mut data = String::new();
-                    f.read_to_string(&mut data)
-                        .expect("[Error] Unable to read the  file.");
-                    let stdout = std::io::stdout(); // get the global stdout entity
-                    let mut handle = std::io::BufWriter::new(stdout); // optional: wrap that handle in a buffer
-                    match writeln!(handle, "{}", data) {
-                        Ok(_res) => {}
-                        Err(err) => {
-                            eprintln!("[Error] Unable to display the file contents. {:?}", err);
-                            process::exit(1);
+            if file.is_file() {
+                match File::open(file) {
+                    Ok(mut f) => {
+                        let mut data = String::new();
+                        f.read_to_string(&mut data)
+                            .expect("[Error] Unable to read the  file.");
+                        let stdout = std::io::stdout(); // get the global stdout entity
+                        let mut handle = std::io::BufWriter::new(stdout); // optional: wrap that handle in a buffer
+                        match writeln!(handle, "{}", data) {
+                            Ok(_res) => {}
+                            Err(err) => {
+                                eprintln!("[Error] Unable to display the file contents. {:?}", err);
+                                process::exit(1);
+                            }
                         }
                     }
+                    Err(err) => {
+                        eprintln!("[Error] Unable to read the file. {:?}", err);
+                        process::exit(1);
+                    }
                 }
-                Err(err) => {
-                    eprintln!("[Error] Unable to read the file. {:?}", err);
-                    process::exit(1);
-                }
+            } else {
+                eprintln!("[Error] {} is a directory", file.display());
             }
         } else {
-            eprintln!("[Error] No such file or directory.");
+            eprintln!("[Error] No such file");
             process::exit(1);
         }
     }

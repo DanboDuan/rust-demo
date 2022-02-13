@@ -7,15 +7,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'kt'",
+            "name": "Debug executable 'echo'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=kt",
-                    "--package=kt"
+                    "--bin=echo",
+                    "--package=echo"
                 ],
                 "filter": {
-                    "name": "kt",
+                    "name": "echo",
                     "kind": "bin"
                 }
             },
@@ -25,16 +25,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'kt'",
+            "name": "Debug unit tests in executable 'echo'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=kt",
-                    "--package=kt"
+                    "--bin=echo",
+                    "--package=echo"
                 ],
                 "filter": {
-                    "name": "kt",
+                    "name": "echo",
                     "kind": "bin"
                 }
             },

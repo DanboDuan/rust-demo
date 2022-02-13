@@ -1,7 +1,17 @@
 {
-	 "folders": [
+    "folders": [
         {
             "path": "kt"
+        },
+        {
+            "path": "echo"
+        },
+        {
+            "path": "json-rpc"
+        },
+        {
+            "path": "lldb"
         }
-        ]
+    ],
+    "settings": {}
 }
